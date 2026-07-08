@@ -9,7 +9,7 @@ import pytest
 import pandas as pd
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-from preprocess import handle_missing_values, encode_features, split_features_target
+from preprocess import handle_missing_values, encode_features, split_features_target  # noqa: E402
 
 
 # ─── Fixtures ─────────────────────────────────────────────────────────────────

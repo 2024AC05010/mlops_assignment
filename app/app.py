@@ -16,7 +16,7 @@ from prometheus_client import Counter, Histogram, generate_latest
 
 # Add src to path - this was tricky to get right
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-from predict import run_prediction
+from predict import run_prediction  # noqa: E402
 
 # Create logs directory if it doesn't exist
 os.makedirs("logs", exist_ok=True)
