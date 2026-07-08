@@ -56,7 +56,7 @@ def encode_features(df):
     df = df.copy()
 
     categorical_cols = ["cp", "restecg", "slope", "thal"]
-    
+
     # One-hot encoding - this increases dimensionality but works well for tree models
     # For logistic regression, might want to try different approach
     df = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
@@ -101,10 +101,10 @@ def full_preprocessing_pipeline(file_path="data/heart.csv", test_size=0.2, rando
     End-to-end preprocessing pipeline.
     Returns train/test splits with scaled features.
     """
-    print("="*60)
+    print("=" * 60)
     print("STARTING PREPROCESSING PIPELINE")
-    print("="*60)
-    
+    print("=" * 60)
+
     df_raw = load_data(file_path)
     df_clean = handle_missing_values(df_raw)
     df_encoded = encode_features(df_clean)
@@ -134,9 +134,9 @@ def full_preprocessing_pipeline(file_path="data/heart.csv", test_size=0.2, rando
     print(f"[INFO] Feature columns saved to {cols_path}")
     print(f"[DEBUG] Total features: {len(feature_cols)}")
 
-    print("="*60)
+    print("=" * 60)
     print("PREPROCESSING COMPLETE")
-    print("="*60)
+    print("=" * 60)
 
     return X_train_sc, X_test_sc, y_train, y_test, feature_cols
 

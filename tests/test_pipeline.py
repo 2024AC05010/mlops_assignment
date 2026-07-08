@@ -7,8 +7,6 @@ import sys
 import os
 import pytest
 import pandas as pd
-import numpy as np
-import pickle
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 from preprocess import handle_missing_values, encode_features, split_features_target

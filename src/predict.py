@@ -5,7 +5,6 @@
 # TODO: Add batch prediction support for multiple patients
 
 import pickle
-import numpy as np
 import pandas as pd
 
 
@@ -94,16 +93,16 @@ def run_prediction(input_dict):
 
 if __name__ == "__main__":
     # Sample test input - using values from the dataset
-    print("="*60)
+    print("=" * 60)
     print("TESTING PREDICTION FUNCTION")
-    print("="*60)
-    
+    print("=" * 60)
+
     sample_input = {
         "age": 54, "sex": 1, "cp": 2, "trestbps": 130,
         "chol": 250, "fbs": 0, "restecg": 1, "thalach": 150,
         "exang": 0, "oldpeak": 1.5, "slope": 2, "ca": 0, "thal": 2
     }
-    
+
     try:
         output = run_prediction(sample_input)
         print(f"\n[PREDICTION] {output}")

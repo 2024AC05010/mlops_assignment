@@ -9,7 +9,6 @@ import mlflow.sklearn
 import pickle
 import os
 import numpy as np
-import pandas as pd
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
@@ -212,11 +211,11 @@ def save_best_model(lr_model, rf_model, lr_metrics, rf_metrics):
     if lr_metrics["roc_auc"] >= rf_metrics["roc_auc"]:
         best_model = lr_model
         best_name = "LogisticRegression"
-        print(f"[INFO] Selecting Logistic Regression as best model")
+        print("[INFO] Selecting Logistic Regression as best model")
     else:
         best_model = rf_model
         best_name = "RandomForest"
-        print(f"[INFO] Selecting Random Forest as best model")
+        print("[INFO] Selecting Random Forest as best model")
 
     model_path = "models/best_model.pkl"
     with open(model_path, "wb") as f:
@@ -227,10 +226,10 @@ def save_best_model(lr_model, rf_model, lr_metrics, rf_metrics):
 
 
 if __name__ == "__main__":
-    print("="*60)
+    print("=" * 60)
     print("STARTING MODEL TRAINING")
-    print("="*60)
-    
+    print("=" * 60)
+
     # Load preprocessed data
     X_train, X_test, y_train, y_test, feature_cols = full_preprocessing_pipeline()
 
@@ -240,10 +239,10 @@ if __name__ == "__main__":
 
     # Select and save best model
     best_model, best_name = save_best_model(lr_model, rf_model, lr_metrics, rf_metrics)
-    
-    print("="*60)
+
+    print("=" * 60)
     print(f"[DONE] Training complete. Best model: {best_name}")
-    print("="*60)
+    print("=" * 60)
     print("\nNext steps:")
     print("1. Check MLflow UI: mlflow ui")
     print("2. Test the model: python src/predict.py")

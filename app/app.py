@@ -8,12 +8,11 @@ import sys
 import os
 import logging
 from datetime import datetime
-import time
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
-from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+from prometheus_client import Counter, Histogram, generate_latest
 
 # Add src to path - this was tricky to get right
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
@@ -98,7 +97,7 @@ def predict(patient_data: PatientData):
     """
     Accepts patient health data and returns
     heart disease prediction with confidence score.
-    
+
     Note: This is a demo/educational API - not for medical use!
     """
     logger.info(f"[REQUEST] /predict called with: {patient_data.dict()}")
@@ -133,15 +132,15 @@ def predict(patient_data: PatientData):
 if __name__ == "__main__":
     # Create logs directory if it doesn't exist
     os.makedirs("logs", exist_ok=True)
-    
-    print("="*60)
+
+    print("=" * 60)
     print("STARTING FASTAPI SERVER")
-    print("="*60)
+    print("=" * 60)
     print("API will be available at: http://localhost:8000")
     print("Docs available at: http://localhost:8000/docs")
     print("Metrics at: http://localhost:8000/metrics")
-    print("="*60)
-    
+    print("=" * 60)
+
     # Run the server
     # reload=False to avoid issues with module reloading
     uvicorn.run(app, host="0.0.0.0", port=8000)
