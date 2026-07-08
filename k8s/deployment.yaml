@@ -1,0 +1,59 @@
+# deployment.yaml
+# Kubernetes deployment manifest for Heart Disease Prediction API
+# Initially used NodePort for local testing, changed to LoadBalancer for cloud deployment
+# Resource limits are conservative - can be adjusted based on actual usage
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heart-disease-api
+  labels:
+    app: heart-disease-api
+spec:
+  replicas: 2  # Running 2 replicas for high availability
+  selector:
+    matchLabels:
+      app: heart-disease-api
+  template:
+    metadata:
+      labels:
+        app: heart-disease-api
+    spec:
+      containers:
+        - name: heart-disease-api
+          image: heart-disease-api:latest
+          imagePullPolicy: IfNotPresent  # Use local image if available
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "256Mi"  # Minimum memory needed
+              cpu: "250m"       # Minimum CPU needed
+            limits:
+              memory: "512Mi"  # Max memory limit
+              cpu: "500m"       # Max CPU limit
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10  # Give time for app to start
+            periodSeconds: 15         # Check every 15 seconds
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5   # Ready check starts sooner
+            periodSeconds: 10         # Check every 10 seconds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: heart-disease-service
+spec:
+  selector:
+    app: heart-disease-api
+  type: LoadBalancer  # For cloud deployment - use NodePort for local
+  ports:
+    - protocol: TCP
+      port: 80           # External port
+      targetPort: 8000   # Container port
