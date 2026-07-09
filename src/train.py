@@ -244,6 +244,5 @@ if __name__ == "__main__":
     print(f"[DONE] Training complete. Best model: {best_name}")
     print("=" * 60)
     print("\nNext steps:")
-    print("1. Check MLflow UI: mlflow ui")
-    print("2. Test the model: python src/predict.py")
-    print("3. Start API: python app/app.py")
+    print("1. Test the model: python src/predict.py")
+    print("2. Start API: python app/app.py")

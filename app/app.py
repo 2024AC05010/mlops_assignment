@@ -1,9 +1,3 @@
-# app.py
-# FastAPI app to serve heart disease prediction model
-# Initially had issues with uvicorn reload - fixed by setting reload=False
-# TODO: Add rate limiting and authentication for production
-# TODO: Add input validation for medical data ranges
-
 import sys
 import os
 import logging
